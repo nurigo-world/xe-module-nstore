@@ -91,6 +91,12 @@
 </div>
 
 <include target="footer.html" />
+<block cond="$lang_type == 'en'">
+	<load target="js/datepicker.en.js" />
+</block>
+<block cond="$lang_type == 'zh-TW'">
+	<load target="js/datepicker.zh-TW.js" />
+</block>
 <script type="text/javascript">
 (function($){
 	$(function(){
@@ -98,7 +104,7 @@
 
 			$(this).prev('input[type="hidden"]').val(this.value.replace(/-/g,""))}
 		};
-		$.extend(option,$.datepicker.regional['{$lang_type}']);
+		//$.extend(option,$.datepicker.regional['{$lang_type}']);
 		$(".inputDate").datepicker(option);
 		$(".dateRemover").click(function() {
 			$(this).parent().prevAll('input').val('');

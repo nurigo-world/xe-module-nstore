@@ -25,3 +25,23 @@ function change_period(days, month) {
 	jQuery('#orderlist .period #startdateInput').val(startdateStr);
 	jQuery('#fo_search').submit();
 }
+
+function addDays(myDate, days) {
+        return new Date(myDate.getTime() + days*24*60*60*1000);
+}
+
+function addMonth(currDate, month) {
+        var currDay   = currDate.getDate();
+        var currMonth = currDate.getMonth();
+        var currYear  = currDate.getFullYear();
+        var ModMonth = currMonth + month;
+        if (ModMonth > 12) {
+                ModMonth = ModMonth - 12;
+                currYear = currYear + 1;
+        }
+        if (ModMonth < 0) {
+                ModMonth = 12 + (ModMonth);
+                currYear = currYear - 1;
+        }
+        return new Date(currYear, ModMonth, currDay);
+}
