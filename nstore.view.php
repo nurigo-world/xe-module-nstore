@@ -34,12 +34,6 @@ class nstoreView extends nstore
 		{
 			Context::set('login_chk','N');
 		}
-
-		$oLicenseModel = &getModel('license');
-		if(!$oLicenseModel || ($oLicenseModel && !$oLicenseModel->getLicenseConfirm()))
-		{
-			Context::addHtmlHeader("<script>jQuery(document).ready(function() { jQuery('<div style=\"background:#fff; padding:6px; position:fixed; right:6px; bottom:6px; z-index:999999; \">Powered by <a href=\"http://www.xeshoppingmall.com\">NURIGO</a></div>').appendTo('body'); });</script>");
-		}
 	}
 
 	// 주문내역 보기 (날짜별)
