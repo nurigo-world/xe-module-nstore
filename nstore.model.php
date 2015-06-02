@@ -183,6 +183,41 @@ class nstoreModel extends nstore
 	{
 		array_push($obj, 'nstore');
 	}
+
+
+	function triggerGetManagerMenu(&$manager_menu)
+	{
+		$oModuleModel = &getModel('module');
+
+		$logged_info = Context::get('logged_info');
+
+		$output = executeQueryArray('nstore.getModInstList');
+		if(!$output->toBool()) return $output;
+
+		$list = $output->data;
+
+		$menu = new stdClass();
+		$menu->title = '쇼핑몰';
+		$menu->icon = 'cart';
+		$menu->module = 'nstore';
+		$menu->submenu = array();
+
+		foreach($list as $key => $val)
+		{
+			$grant = $oModuleModel->getGrant($val, $logged_info);
+			if($grant->manager)
+			{
+				$submenu1 = new stdClass();
+				$submenu1->action = array('dispNstoreAdminOrderManagement');
+				$submenu1->mid = $val->mid;
+				$submenu1->title = '주문관리';
+				$submenu1->module = 'nstore';
+				$menu->submenu[] = $submenu1;
+			}
+		}
+
+		if(count($menu->submenu)) $manager_menu['nstore'] = $menu;
+	}
 }
 /* End of file nstore.model.php */
 /* Location: ./modules/nstore/nstore.model.php */

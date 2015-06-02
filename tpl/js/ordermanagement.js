@@ -4,12 +4,13 @@
 		$('a.modalAnchor.viewOrderInfo').bind('before-open.mw', function(event){
 			// get cart_srl
 			var order_srl = $(this).attr('data-order-srl');
+			var mid = $(this).attr('data-mid');
 
 			// get enrollment form
 			exec_xml(
 				'ncart'
 				, 'getNcartAdminOrderDetails'
-				, {order_srl : order_srl}
+				, {order_srl : order_srl, 'mid': mid}
 				, function(ret) {
 					var tpl = ret.tpl.replace(/<enter>/g, '\n');
 					$('#orderInfo').html(tpl); }

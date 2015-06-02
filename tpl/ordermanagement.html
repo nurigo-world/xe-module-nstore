@@ -15,17 +15,17 @@
 
 
 <div style="margin-bottom:20px;">
-	<a href="{getUrl('','module',$module,'act',$act,'status','0')}" class="active"|cond="$status=='0'" cond="0">{$lang->cmd_cart}</a> <i>|</i>
-	<a href="{getUrl('','module',$module,'act',$act,'status','1')}" class="active"|cond="$status=='1'">{$lang->wait_deposit}</a> <i>|</i>
-	<a href="{getUrl('','module',$module,'act',$act,'status','2')}" class="active"|cond="$status=='2'">{$lang->deposit_done}</a> <i>|</i>
-	<a href="{getUrl('','module',$module,'act',$act,'status','3')}" class="active"|cond="$status=='3'">{$lang->prepare_delivery}</a> <i>|</i>
-	<a href="{getUrl('','module',$module,'act',$act,'status','4')}" class="active"|cond="$status=='4'">{$lang->on_delivery}</a> <i>|</i>
-	<a href="{getUrl('','module',$module,'act',$act,'status','5')}" class="active"|cond="$status=='5'">{$lang->delivery_done}</a> <i>|</i>
-	<a href="{getUrl('','module',$module,'act',$act,'status','6')}" class="active"|cond="$status=='6'">{$lang->transaction_done}</a> <i>|</i>
-	<a href="{getUrl('','module',$module,'act',$act,'status','A')}" class="active"|cond="$status=='A'">{$lang->cancelled}</a> <i>|</i>
-	<a href="{getUrl('','module',$module,'act',$act,'status','B')}" class="active"|cond="$status=='B'">{$lang->returns}</a> <i>|</i>
-	<a href="{getUrl('','module',$module,'act',$act,'status','C')}" class="active"|cond="$status=='C'">{$lang->exchanges}</a> <i>|</i>
-	<a href="{getUrl('','module',$module,'act',$act,'status','D')}" class="active"|cond="$status=='D'">{$lang->refund}</a> <i>|</i>
+	<a href="{getUrl('','mid',$mid,'module',$module,'act',$act,'status','0')}" class="active"|cond="$status=='0'" cond="0">{$lang->cmd_cart}</a> <i>|</i>
+	<a href="{getUrl('','mid',$mid,'module',$module,'act',$act,'status','1')}" class="active"|cond="$status=='1'">{$lang->wait_deposit}</a> <i>|</i>
+	<a href="{getUrl('','mid',$mid,'module',$module,'act',$act,'status','2')}" class="active"|cond="$status=='2'">{$lang->deposit_done}</a> <i>|</i>
+	<a href="{getUrl('','mid',$mid,'module',$module,'act',$act,'status','3')}" class="active"|cond="$status=='3'">{$lang->prepare_delivery}</a> <i>|</i>
+	<a href="{getUrl('','mid',$mid,'module',$module,'act',$act,'status','4')}" class="active"|cond="$status=='4'">{$lang->on_delivery}</a> <i>|</i>
+	<a href="{getUrl('','mid',$mid,'module',$module,'act',$act,'status','5')}" class="active"|cond="$status=='5'">{$lang->delivery_done}</a> <i>|</i>
+	<a href="{getUrl('','mid',$mid,'module',$module,'act',$act,'status','6')}" class="active"|cond="$status=='6'">{$lang->transaction_done}</a> <i>|</i>
+	<a href="{getUrl('','mid',$mid,'module',$module,'act',$act,'status','A')}" class="active"|cond="$status=='A'">{$lang->cancelled}</a> <i>|</i>
+	<a href="{getUrl('','mid',$mid,'module',$module,'act',$act,'status','B')}" class="active"|cond="$status=='B'">{$lang->returns}</a> <i>|</i>
+	<a href="{getUrl('','mid',$mid,'module',$module,'act',$act,'status','C')}" class="active"|cond="$status=='C'">{$lang->exchanges}</a> <i>|</i>
+	<a href="{getUrl('','mid',$mid,'module',$module,'act',$act,'status','D')}" class="active"|cond="$status=='D'">{$lang->refund}</a> <i>|</i>
 </div>
 
 <form id="searchForm" action="./" method="get" class="x_input-append" >
@@ -109,7 +109,7 @@
 					<td cond="$module_config->escrow_yn=='Y'" class="escrow" data-order-srl="{$order->order_srl}">
 						<a cond="$status!='0'" href="#" id="escrow_{$order->order_srl}" onclick="window.open('{getUrl('act','dispNstoreAdminEscrowDelivery','order_srl',$order->order_srl)}', 'popup', 'left=50, top=20, width=700, scrollbars=yes, height=700, toolbars=no'); return false;" data-order-srl="{$order->order_srl}"><img src="./img/loading.gif" /></a>
 					</td>
-					<td><a href="#viewOrderInfo" class="modalAnchor viewOrderInfo" data-order-srl="{$order->order_srl}">{$lang->title_order_info}</a></td>
+					<td><a href="#viewOrderInfo" class="modalAnchor viewOrderInfo" data-mid="{$mid}" data-order-srl="{$order->order_srl}">{$lang->title_order_info}</a></td>
 					<td>
 						<a cond="$status!='0'" href="#" onclick="window.open('{getUrl('act','dispNstoreAdminOrderSheet','order_srl',$order->order_srl)}', 'addressbook_popup', 'left=50, top=20, width=700, scrollbars=yes, height=700, toolbars=no'); return false;"><span>{$lang->cmd_print_ordersheet}</span></a>
 					</td>

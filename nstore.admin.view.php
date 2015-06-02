@@ -150,6 +150,14 @@ class nstoreAdminView extends nstore
 		$oNstoreModel = &getModel('nstore');
 		$oMemberModel = &getModel('member');
 
+		$classfile = _XE_PATH_.'modules/cympusadmin/cympusadmin.class.php';
+		if(file_exists($classfile))
+		{
+				require_once($classfile);
+				$output = cympusadmin::init();
+				if(!$output->toBool()) return $output;
+		}
+
 		$config = $oNstoreModel->getModuleConfig();
 		Context::set('config', $config);
 
@@ -482,6 +490,19 @@ class nstoreAdminView extends nstore
 			Context::set('download_link', $buff->zbxe_news->attrs->download_link);
 		}
 	}
+
+    /**
+     * @brief display the grant information
+     **/
+    function dispNstoreAdminGrantInfo()
+	{
+        // get the grant infotmation from admin module
+        $oModuleAdminModel = getAdminModel('module');
+        $grant_content = $oModuleAdminModel->getModuleGrantHTML($this->module_info->module_srl, $this->xml_info->grant);
+        Context::set('grant_content', $grant_content);
+
+        $this->setTemplateFile('grantinfo');
+    }
 }
 
 /* End of file nstore.admin.view.php */

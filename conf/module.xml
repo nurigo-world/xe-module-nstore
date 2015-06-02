@@ -3,6 +3,8 @@
 	<grants>
 	</grants>
 	<permissions>
+		<permission action="dispNstoreAdminOrderManagement" target="manager" />
+		<permission action="procNstoreAdminOrderExcelDownload" target="manager" />
 	</permissions>
 	<actions>
 		<action name="dispNstoreAdminConfig" type="view" />
@@ -16,6 +18,7 @@
 		<action name="dispNstoreAdminEscrowDelivery" type="view" />
 		<action name="dispNstoreAdminEscrowDenyConfirm" type="view" />
 		<action name="dispNstoreAdminPurchaserInfo" type="view" />
+		<action name="dispNstoreAdminGrantInfo" type="view" />
 
 		<action name="procNstoreAdminConfig" type="controller" />
 		<action name="procNstoreAdminInsertModInst" type="controller" />

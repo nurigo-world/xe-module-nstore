@@ -144,7 +144,7 @@ class nstore extends ModuleObject
 			if(!$oModuleModel->getTrigger('member.getMemberMenu', 'nstore', 'model', 'triggerMemberMenu', 'before')) return true;
 			// 2013. 09. 25 when add new menu in sitemap, custom menu add
 			if(!$oModuleModel->getTrigger('menu.getModuleListInSitemap', 'nstore', 'model', 'triggerModuleListInSitemap', 'after')) return true;
-
+			if(!$oModuleModel->getTrigger('cympusadmin.getManagerMenu', 'nstore', 'model', 'triggerGetManagerMenu', 'before')) return true;
 
 			// extra_vars field added - 2012/11/27
 			if (!$oDB->isColumnExists('nstore_order', 'extra_vars')) return true;
@@ -158,6 +158,8 @@ class nstore extends ModuleObject
         function moduleUpdate()
         {
             $oDB = &DB::getInstance();
+			$oModuleModel = &getModel('module');
+            $oModuleController = &getController('module');
 
 			$this->installTriggers();
 
@@ -165,6 +167,10 @@ class nstore extends ModuleObject
 			if (!$oDB->isColumnExists('nstore_order', 'extra_vars'))
 			{
                 $oDB->addColumn('nstore_order', 'extra_vars', 'text');
+			}
+
+			if(!$oModuleModel->getTrigger('cympusadmin.getManagerMenu', 'nstore', 'model', 'triggerGetManagerMenu', 'before')) {
+				$oModuleController->insertTrigger('cympusadmin.getManagerMenu', 'nstore', 'model', 'triggerGetManagerMenu', 'before');
 			}
 
 			return new Object(0, 'success_updated');
