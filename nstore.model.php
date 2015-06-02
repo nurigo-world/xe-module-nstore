@@ -197,7 +197,7 @@ class nstoreModel extends nstore
 		$list = $output->data;
 
 		$menu = new stdClass();
-		$menu->title = '쇼핑몰';
+		$menu->title = Context::getLang('shoppingmall');
 		$menu->icon = 'cart';
 		$menu->module = 'nstore';
 		$menu->submenu = array();
@@ -210,7 +210,7 @@ class nstoreModel extends nstore
 				$submenu1 = new stdClass();
 				$submenu1->action = array('dispNstoreAdminOrderManagement');
 				$submenu1->mid = $val->mid;
-				$submenu1->title = '주문관리';
+				$submenu1->title = Context::getLang('order_management');
 				$submenu1->module = 'nstore';
 				$menu->submenu[] = $submenu1;
 			}

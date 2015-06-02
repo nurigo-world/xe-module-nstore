@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <lang>
+	<item name="shoppingmall">
+		<value xml:lang="ko">쇼핑몰</value>
+		<value xml:lang="en">Shopping-mall</value>
+		<value xml:lang="jp">ショッピングモール</value>
+		<value xml:lang="zh-TW">線上商城</value>
+	</item>
 	<item name="order_management">
 		<value xml:lang="ko"><![CDATA[주문관리]]></value>
 		<value xml:lang="en"><![CDATA[Order Management]]></value>
