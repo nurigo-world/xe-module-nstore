@@ -121,6 +121,37 @@ class nstoreModel extends nstore
 		return $order_info_arr;
 	}
 
+	/**
+	 * @brief my order items
+	 */
+	function getMyOrderItems($member_srl, $startdate = NULL, $enddate = NULL)
+	{
+		if(!$startdate) $startdate = date('Ymd', time() - (60*60*24*30));
+		if(!$enddate) $enddate = date('Ymd');
+
+		$args->member_srl = $logged_info->member_srl;
+		$args->startdate = $startdate . '000000';
+		$args->enddate = $enddate . '235959';
+		$output = executeQueryArray('nstore.getOrderItems', $args);
+		$item_list = $output->data;
+		if(!$item_list) return array();
+
+		$order_list = array();
+		foreach($item_list as $key=>$val)
+		{
+			$item = new nproductItem($val, $config->currency, $config->as_sign, $config->decimals);
+			if ($item->option_srl)
+			{
+				$item->price += ($item->option_price);
+			}
+			$item_list[$key] = $item;
+
+			if (!isset($order_list[$val->order_srl])) $order_list[$val->order_srl] = array();
+
+			$order_list[$val->order_srl][] = $item;
+		}
+		return $order_list;
+	}
 
 	function getDeliveryCompanies()
 	{
