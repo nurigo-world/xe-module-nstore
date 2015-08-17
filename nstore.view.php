@@ -100,24 +100,25 @@ class nstoreView extends nstore
 
 		$this->setTemplateFile('orderlist');
 	}
-
+	
 	function dispNstoreOrderDetail() 
 	{
 		$oFileModel = &getModel('file');
 		$oEpayModel = &getModel('epay');
 		$oNstoreModel = &getModel('nstore');
-
+		$oNcartModel = &getModel('ncart');
+		
 		$logged_info = Context::get('logged_info');
 		$order_srl = Context::get('order_srl');
-
+		
 		// 주문번호가 없다면
 		if(!$order_srl) return new Object(-1, 'msg_invalid_order_number');
-
+		
 		$order_info = $oNstoreModel->getOrderInfo($order_srl);
-
+		
 		// 주문정보가 없다면
 		if(!$order_info) return new Object(-1, 'msg_invalid_order_number');
-
+		
 		// 권한 체크
 		if($logged_info) 
 		{
@@ -126,34 +127,34 @@ class nstoreView extends nstore
 		}
 		else  // 로그인 되어있지 않다면
 		{
-			$config = $oNstoreModel->getModuleConfig();
-
+			$config = $oNcartModel->getModuleConfig();
+			
 			// 설정에서 비회원 구매를 N으로 해놨다면 return
 			if($config->guest_buy != 'Y') return new Object(-1, 'msg_not_permitted');
-
+			
 			// 설정에서 비회원 구매를 Y로 해놨다면 PermissionCheck
 			$oNstoreController = &getController('nstore');
 			$non_password = Context::get("non_password");
 			$compare_password = $order_info->non_password;
 			$output = $oNstoreController->checkOrderPermission($compare_password, $non_password);
-			if(!$output->toBool()) return $output;
+			if(!is_null($output) && !$output->toBool()) return $output;
 			unset($vars);
 		}
-
+		
 		Context::set('order_info', $order_info);
 		Context::set('order_status', $this->getOrderStatus());
-
+		
 		$payment_info = $oEpayModel->getTransactionByOrderSrl($order_srl);
 		Context::set('payment_info',$payment_info);
 		Context::set('payment_method',$this->getPaymentMethods());
-
+		
 		Context::set('delivery_inquiry_urls', $this->delivery_inquiry_urls);
 		Context::set('delivery_companies', $oNstoreModel->getDeliveryCompanies());
 		Context::set('soldout_process', $this->soldout_process);
-
+		
 		$this->setTemplateFile('orderdetail');
 	}
-
+	
 	function dispNstoreReplyComment() 
 	{
 		// 권한 체크
